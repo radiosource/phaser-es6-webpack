@@ -1,15 +1,12 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // Phaser webpack config
-var phaserModule = path.join(__dirname, '/node_modules/phaser-ce/')
-var phaser = path.join(phaserModule, 'build/custom/phaser-split.js')
-var pixi = path.join(phaserModule, 'build/custom/pixi.js')
-var p2 = path.join(phaserModule, 'build/custom/p2.js')
+const phaser = path.join(__dirname, '/node_modules/phaser/dist/phaser.js')
 
-var definePlugin = new webpack.DefinePlugin({
+const definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
 })
 
@@ -17,9 +14,9 @@ module.exports = {
   entry: {
     app: [
       'babel-polyfill',
-      path.resolve(__dirname, 'src/main.js')
+      path.resolve(__dirname, 'index.js')
     ],
-    vendor: ['pixi', 'p2', 'phaser', 'webfontloader']
+    vendor: ['phaser', 'webfontloader']
   },
   devtool: 'cheap-source-map',
   output: {
@@ -31,10 +28,13 @@ module.exports = {
   watch: true,
   plugins: [
     definePlugin,
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor'/* chunkName= */, filename: 'vendor.bundle.js'/* filename= */}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'/* chunkName= */,
+      filename: 'vendor.bundle.js'/* filename= */
+    }),
     new HtmlWebpackPlugin({
-      filename: '../index.html',
-      template: './src/index.html',
+      filename: './index.html',
+      template: './index.html',
       chunks: ['vendor', 'app'],
       chunksSortMode: 'manual',
       minify: {
@@ -59,10 +59,20 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src') },
-      { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
-      { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
-      { test: /p2\.js/, use: ['expose-loader?p2'] }
+      {
+        test: /\.js$/,
+        include: path.join(__dirname, 'app'),
+        use: {
+          loader: 'babel-loader',
+          options: {
+            "presets": [],
+            "plugins": [
+              ["@babel/plugin-proposal-class-properties", {"loose": true}]
+            ]
+          }
+        }
+      },
+      {test: /phaser-split\.js$/, use: ['expose-loader?Phaser']}
     ]
   },
   node: {
@@ -72,9 +82,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'phaser': phaser,
-      'pixi': pixi,
-      'p2': p2
+      'phaser': phaser
     }
   }
-}
+};

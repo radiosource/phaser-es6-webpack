@@ -4,9 +4,6 @@ class Scene extends Abstract {
 
   constructor() {
     super();
-    this.on('111',function(){
-     console.log("Huy=======")
-    })
   }
 
   init() {

@@ -1,11 +1,20 @@
 import Abstract from '../Abstract'
-import Phaser from "phaser";
 
 class Sprite extends Abstract {
-  asset;
+  #scene;
+  #instance;
+  body;
+  _on = {};
 
-  constructor() {
-    super();
+  constructor(scene, x, y, type) {
+    super(...arguments);
+    this.#scene = scene;
+    this.#instance = this.#scene.physics.add.image(x, y, type).setDepth(2);
+    this.body = this.#instance.body;
+  }
+
+  get instance() {
+    return this.#instance;
   }
 
 }

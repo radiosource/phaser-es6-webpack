@@ -43,7 +43,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html', // path.resolve(__dirname, 'build', 'index.html'),
-      template: './index.html',
+      template: './app/index.html',
       chunks: ['vendor', 'app'],
       chunksSortMode: 'manual',
       minify: {
@@ -93,4 +93,4 @@ module.exports = {
       'phaser': phaser
     }
   }
-};
+}

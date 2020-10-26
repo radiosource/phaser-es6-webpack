@@ -8,7 +8,7 @@ const phaser = path.join(__dirname, '/node_modules/phaser/dist/phaser.js')
 
 const definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
-})
+});
 
 module.exports = {
   entry: {
@@ -33,8 +33,8 @@ module.exports = {
       filename: 'vendor.bundle.js'/* filename= */
     }),
     new HtmlWebpackPlugin({
-      filename: './index.html',
-      template: './index.html',
+      filename: '../index.html',
+      template: './app/index.html',
       chunks: ['vendor', 'app'],
       chunksSortMode: 'manual',
       minify: {

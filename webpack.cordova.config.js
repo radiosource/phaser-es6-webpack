@@ -48,7 +48,7 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, 'www/index.html'),
-      template: './index.html',
+      template: './app/index.html',
       chunks: [
         'vendor', 'app'
       ],

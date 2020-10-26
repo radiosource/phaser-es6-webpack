@@ -5,12 +5,12 @@ class Main extends Abstract {
 
     constructor() {
         super({key: 'Main'});
-        Global.scene = this;
-        window.scene = this;
     }
 
     init() {
         console.log("init");
+        Global.scene = this;
+        window._scene = this;
     }
 
     preload() {

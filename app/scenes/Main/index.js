@@ -15,8 +15,7 @@ class Main extends Abstract {
 
     preload() {
         console.log("preload");
-        this.load.setPath('../../assets/');
-        this.load.image('background', 'backgrounds/default.png');
+        this.load.image('background', 'assets/backgrounds/default.png');
     }
 
     create() {

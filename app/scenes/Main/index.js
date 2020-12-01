@@ -1,6 +1,6 @@
 import Abstract from '../Abstract'
 
-const Global = require('../../helpers/Global');
+const Global = require('../../Global');
 
 class Main extends Abstract {
 
@@ -13,7 +13,6 @@ class Main extends Abstract {
     init() {
         console.log("init");
         super.init();
-        Global.scene = this;
     }
 
     preload() {

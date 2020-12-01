@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import config from './config'
-import Global from "./helpers/Global";
+import Global from "./Global";
 
 
 class Game extends Phaser.Game {

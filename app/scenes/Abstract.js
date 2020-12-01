@@ -2,17 +2,16 @@ import Phaser from 'phaser'
 import mixins from '../mixins';
 
 const {constants} = require('../../config/default');
+const Global = require('../Global');
 
 class Abstract extends Phaser.Scene {
 
     constructor() {
         super(...arguments);
-        this._bindEventsHandlers();
     }
 
     init() {
-        console.log(`debug## init:Abstract.js:14 -------------------------------------------------------`);
-        console.log(this)
+        Global.scene = this;
     }
 
     preload() {
@@ -25,4 +24,4 @@ class Abstract extends Phaser.Scene {
     }
 }
 
-module.exports = mixins.attach(Abstract, mixins.withEvents);
+module.exports = Abstract;

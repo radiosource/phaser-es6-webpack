@@ -1,16 +1,19 @@
 import Abstract from '../Abstract'
+
 const Global = require('../../helpers/Global');
 
 class Main extends Abstract {
 
+    static NAME = 'Main';
+
     constructor() {
-        super({key: 'Main'});
+        super({key: Main.NAME});
     }
 
     init() {
         console.log("init");
+        super.init();
         Global.scene = this;
-        window._scene = this;
     }
 
     preload() {
@@ -22,9 +25,6 @@ class Main extends Abstract {
         console.log("create");
         const {width, height} = Global.game.config;
         this.backgroung = {};
-        this.backgroung.image = this
-            .add.tileSprite(width / 2, height / 2, width, height, 'background')
-            .setScrollFactor(0);
     }
 
     update(time) {

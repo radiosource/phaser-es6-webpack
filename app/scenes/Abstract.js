@@ -11,6 +11,8 @@ class Abstract extends Phaser.Scene {
     }
 
     init() {
+        console.log(`debug## init:Abstract.js:14 -------------------------------------------------------`);
+        console.log(this)
     }
 
     preload() {

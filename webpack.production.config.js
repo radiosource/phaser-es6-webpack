@@ -1,10 +1,9 @@
-var path = require('path');
-var webpack = require('webpack');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var WorkboxPlugin = require('workbox-webpack-plugin');
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+var WorkboxPlugin = require('workbox-webpack-plugin')
 
 // Phaser webpack config
 var phaser = path.join(__dirname, '/node_modules/phaser/dist/phaser.js')
@@ -31,7 +30,13 @@ module.exports = {
     definePlugin,
     new CleanWebpackPlugin(['build']),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new UglifyJSPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      drop_console: true,
+      minimize: true,
+      output: {
+        comments: false
+      }
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor' /* chunkName= */,
       filename: 'js/vendor.bundle.js' /* filename= */
